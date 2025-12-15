@@ -1,0 +1,90 @@
+[
+  {
+    "code": "IN",
+    "name": "India",
+    "adjacentCountries": [
+      "Pakistan",
+      "China",
+      "Nepal",
+      "Bhutan",
+      "Bangladesh",
+      "Myanmar"
+    ]
+  },
+  {
+    "code": "US",
+    "name": "United States",
+    "adjacentCountries": [
+      "Canada",
+      "Mexico"
+    ]
+  },
+  {
+    "code": "CA",
+    "name": "Canada",
+    "adjacentCountries": [
+      "United States"
+    ]
+  },
+  {
+    "code": "MX",
+    "name": "Mexico",
+    "adjacentCountries": [
+      "United States",
+      "Guatemala",
+      "Belize"
+    ]
+  },
+  {
+    "code": "CN",
+    "name": "China",
+    "adjacentCountries": [
+      "India",
+      "Pakistan",
+      "Nepal",
+      "Bhutan",
+      "Mongolia",
+      "Russia"
+    ]
+  },
+  {
+    "code": "PK",
+    "name": "Pakistan",
+    "adjacentCountries": [
+      "India",
+      "Afghanistan",
+      "Iran",
+      "China"
+    ]
+  },
+  {
+    "code": "DE",
+    "name": "Germany",
+    "adjacentCountries": [
+      "France",
+      "Poland",
+      "Austria",
+      "Switzerland"
+    ]
+  },
+  {
+    "code": "FR",
+    "name": "France",
+    "adjacentCountries": [
+      "Germany",
+      "Italy",
+      "Spain",
+      "Belgium"
+    ]
+  },
+  {
+    "code": "AU",
+    "name": "Australia",
+    "adjacentCountries": []
+  },
+  {
+    "code": "NZ",
+    "name": "New Zealand",
+    "adjacentCountries": []
+  }
+]
