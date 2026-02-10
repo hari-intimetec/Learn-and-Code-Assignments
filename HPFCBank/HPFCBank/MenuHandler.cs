@@ -24,7 +24,9 @@ namespace HPFCBank
         {
             while (true)
             {
-                Console.WriteLine("\n1.Create Customer\n2.Create Account\n3.Deposit\n4.Withdraw\n5.Transfer\n6.ShowBalance\n7.Loan\n8.CalculateLoan\n9.GetLoanDetails\n10.Exit");
+                Console.WriteLine("\n1.Create Customer\n2.Create Account" +
+                    "\n3.Deposit\n4.Withdraw\n5.Transfer\n6.ShowBalance" +
+                    "\n7.Loan\n8.CalculateLoan\n9.GetLoanDetails\n10.Exit");
                 int choice = int.Parse(Console.ReadLine());
 
                 switch (choice)
@@ -49,8 +51,10 @@ namespace HPFCBank
             Console.Write("Name: ");
             var customerName = Console.ReadLine();
             var customerId = _customerService.CreateCustomer(customerName);
-            Console.WriteLine($"Customer ID: {customerId}");
-
+            if(customerId != 0)
+            {
+              Console.WriteLine($"Customer ID: {customerId}");
+            }
         }
 
         private void CreateAccount()

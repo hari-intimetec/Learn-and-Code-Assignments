@@ -1,9 +1,9 @@
-﻿using HPFCBank.Entities;
+﻿using HPFCBank.Models;
 using HPFCBank.Repositories.Interfaces;
 using System.Collections.Generic;
 namespace HPFCBank.Repositories
 {
-    public class InMemoryCustomerRepository : ICustomerRepository
+    public class CustomerRepository : ICustomerRepository
     {
         private readonly Dictionary<int, Customer> _customers = new Dictionary<int, Customer>();
 

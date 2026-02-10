@@ -1,7 +1,8 @@
-﻿using HPFCBank.Entities;
+﻿using HPFCBank.Models;
 using HPFCBank.Repositories.Interfaces;
 using HPFCBank.Services.Interfaces;
 using System;
+using System.Linq;
 namespace HPFCBank.Services
 {
     public class CustomerService : ICustomerService
@@ -16,6 +17,11 @@ namespace HPFCBank.Services
 
         public int CreateCustomer(string name)
         {
+            if(name.Any(char.IsDigit))
+            {
+                Console.WriteLine("Customer name cannot contain numbers.");
+                return 0;
+            };
             Customer customer = new Customer(_nextCustomerId, name);
             _nextCustomerId++;
             _customerRepository.Save(customer);
