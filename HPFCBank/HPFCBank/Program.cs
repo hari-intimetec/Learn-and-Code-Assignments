@@ -7,9 +7,9 @@ namespace HPFCBank
     {
         static void Main(string[] args)
         {
-            var accountRepo = new InMemoryAccountRepository();
-            var customerRepo = new InMemoryCustomerRepository();
-            var loanRepo = new InMemoryLoanRepository();
+            var accountRepo = new AccountRepository();
+            var customerRepo = new CustomerRepository();
+            var loanRepo = new LoanRepository();
 
             var accountService = new AccountService(accountRepo);
             var loanService = new LoanService(loanRepo, customerRepo);

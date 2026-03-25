@@ -1,4 +1,4 @@
-﻿using HPFCBank.Entities;
+﻿using HPFCBank.Models;
 namespace HPFCBank.Services.Interfaces
 {
     public interface ICustomerService

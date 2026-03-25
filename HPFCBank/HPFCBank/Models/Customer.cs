@@ -1,4 +1,4 @@
-﻿namespace HPFCBank.Entities
+﻿namespace HPFCBank.Models
 {
     public class Customer
     {

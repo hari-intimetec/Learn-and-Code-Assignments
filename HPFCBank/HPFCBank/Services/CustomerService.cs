@@ -1,8 +1,10 @@
-﻿using HPFCBank.Models;
+﻿using HPFCBank.Exceptions;
+using HPFCBank.Models;
 using HPFCBank.Repositories.Interfaces;
 using HPFCBank.Services.Interfaces;
 using System;
 using System.Linq;
+
 namespace HPFCBank.Services
 {
     public class CustomerService : ICustomerService
@@ -17,11 +19,16 @@ namespace HPFCBank.Services
 
         public int CreateCustomer(string name)
         {
-            if(name.Any(char.IsDigit))
+            if (string.IsNullOrWhiteSpace(name))
             {
-                Console.WriteLine("Customer name cannot contain numbers.");
-                return 0;
-            };
+                throw new InvalidCustomerNameException(name, "Customer name cannot be null or empty.");
+            }
+
+            if (name.Any(char.IsDigit))
+            {
+                throw new InvalidCustomerNameException(name);
+            }
+
             Customer customer = new Customer(_nextCustomerId, name);
             _nextCustomerId++;
             _customerRepository.Save(customer);
@@ -34,11 +41,11 @@ namespace HPFCBank.Services
             {
                 return _customerRepository.Get(id);
             }
-            catch (Exception)
+            catch (CustomerNotFoundException ex)
             {
-                return null;
+                Console.WriteLine($"Error: {ex.Message}");
+                return new Customer(0, string.Empty);
             }
         }
     }
-
 }

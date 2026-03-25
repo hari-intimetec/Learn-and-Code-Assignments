@@ -1,7 +1,9 @@
-﻿using HPFCBank.Entities;
+﻿using HPFCBank.Exceptions;
+using HPFCBank.Models;
 using HPFCBank.Repositories.Interfaces;
 using HPFCBank.Services.Interfaces;
 using System;
+
 namespace HPFCBank.Services
 {
     public class LoanService : ILoanService
@@ -34,9 +36,9 @@ namespace HPFCBank.Services
                 _loanRepository.Save(loan);
                 Console.WriteLine("Loan created successfully");
             }
-            catch (Exception)
+            catch (CustomerNotFoundException ex)
             {
-                Console.WriteLine("Customer not found");
+                Console.WriteLine($"Error: {ex.Message}");
             }
         }
 
@@ -44,21 +46,19 @@ namespace HPFCBank.Services
         {
             try
             {
-                Loan loan=_loanRepository.Get(loanId);
+                Loan loan = _loanRepository.Get(loanId);
                 Console.WriteLine($"Loan ID: {loan.Id}, Customer ID: {loan.CustomerId}, Principal: {loan.Principal}, interest rate: {loan.InterestRate}, Time Period: {loan.DurationInYears}");
             }
-            catch (Exception)
+            catch (LoanNotFoundException ex)
             {
-                Console.WriteLine("Loan Id doesnot exist.");
+                Console.WriteLine($"Error: {ex.Message}");
             }
-            return;
-
         }
+
         public void CalculateLoan(decimal principal, double rate, int years)
         {
-            var totalAmount= principal + (principal * (decimal)rate * years);
+            var totalAmount = principal + (principal * (decimal)rate * years);
             Console.WriteLine($"Total amount to be paid: {totalAmount}");
         }
     }
-
 }

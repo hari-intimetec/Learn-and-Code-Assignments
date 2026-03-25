@@ -1,4 +1,4 @@
-﻿using HPFCBank.Entities;
+﻿using HPFCBank.Models;
 namespace HPFCBank.Repositories.Interfaces
 {
     public interface IAccountRepository

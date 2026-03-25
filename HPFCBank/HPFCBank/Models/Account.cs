@@ -1,5 +1,5 @@
 ﻿using System;
-namespace HPFCBank.Entities
+namespace HPFCBank.Models
 {
     public class Account
     {
