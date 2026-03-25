@@ -62,9 +62,8 @@ namespace HPFCBank
             Console.Write("Customer ID: ");
             int customerId = Int16.Parse(Console.ReadLine());
             var customer = _customerService.GetCustomer(customerId);
-            if(customer == null)
+            if(customer.Id == 0)
             {
-                Console.WriteLine("Customer doesnot exist.");
                 return;
             }
             var accountId = _accountService.CreateAccount(customerId);

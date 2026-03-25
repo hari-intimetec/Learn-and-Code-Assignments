@@ -6,5 +6,4 @@ namespace HPFCBank.Repositories.Interfaces
         void Save(Loan loan);
         Loan Get(int id);
     }
-
 }

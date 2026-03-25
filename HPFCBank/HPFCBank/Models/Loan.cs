@@ -21,6 +21,5 @@
         {
             return Principal + (Principal * (decimal)InterestRate * DurationInYears);
         }
-
     }
 }
