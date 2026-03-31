@@ -1,7 +1,5 @@
 ﻿using PersonalFinanceTracker.Enum;
 using PersonalFinanceTracker.Exceptions;
-using PersonalFinanceTracker.Models;
-using PersonalFinanceTracker.Repositories;
 using PersonalFinanceTracker.Repositories.Interfaces;
 using PersonalFinanceTracker.Services.Interfaces;
 namespace PersonalFinanceTracker.Services
@@ -12,7 +10,7 @@ namespace PersonalFinanceTracker.Services
 
         public ReportService(ITransactionRepository transactionRepo)
         {
-            _transactionRepo = transactionRepo ?? throw new ArgumentNullException(nameof(transactionRepo), "Transaction repository cannot be null.");
+            _transactionRepo = transactionRepo;
         }
 
         public void PrintMonthlySummary()
@@ -20,10 +18,10 @@ namespace PersonalFinanceTracker.Services
             try
             {
                 var transactions = _transactionRepo.GetAll();
+                Console.WriteLine("\n--- Monthly Summary ---");
 
                 if (transactions == null || transactions.Count == 0)
                 {
-                    Console.WriteLine("\n--- Monthly Summary ---");
                     Console.WriteLine("No transactions found.");
                     return;
                 }
@@ -38,7 +36,6 @@ namespace PersonalFinanceTracker.Services
 
                 var savings = income - expense;
 
-                Console.WriteLine("\n--- Monthly Summary ---");
                 Console.WriteLine($"Income: {income:C}");
                 Console.WriteLine($"Expense: {expense:C}");
                 Console.WriteLine($"Savings: {savings:C}");

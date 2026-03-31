@@ -1,7 +1,5 @@
 ﻿using PersonalFinanceTracker.Controller.Interfaces;
-using PersonalFinanceTracker.Enum;
 using PersonalFinanceTracker.Exceptions;
-using PersonalFinanceTracker.Models;
 using PersonalFinanceTracker.Services.Interfaces;
 namespace PersonalFinanceTracker.Controller
 {
@@ -11,40 +9,14 @@ namespace PersonalFinanceTracker.Controller
 
         public TransactionController(ITransactionService service)
         {
-            _service = service ?? throw new ArgumentNullException(nameof(service), "Transaction service cannot be null.");
+            _service = service;
         }
 
         public void Add()
         {
             try
-            {
-                Console.Write("Type (1=Income, 2=Expense): ");
-                var typeInput = Console.ReadLine();
-
-                if (string.IsNullOrWhiteSpace(typeInput) || (typeInput != "1" && typeInput != "2"))
-                {
-                    throw new InvalidInputException("Invalid transaction type. Please enter 1 for Income or 2 for Expense.");
-                }
-
-                Console.Write("Amount: ");
-                var amountInput = Console.ReadLine();
-
-                if (!decimal.TryParse(amountInput, out var amount))
-                {
-                    throw new InvalidInputException("Invalid amount format. Please enter a valid decimal number.");
-                }
-
-                Console.Write("Category: ");
-                var category = Console.ReadLine();
-
-                if (string.IsNullOrWhiteSpace(category))
-                {
-                    throw new InvalidInputException("Category cannot be empty.");
-                }
-
-                var type = typeInput == "1" ? TransactionType.Income : TransactionType.Expense;
-
-                _service.AddTransaction(type, amount, category);
+            { 
+                _service.AddTransaction();
                 Console.WriteLine("Transaction added successfully.");
             }
             catch (InvalidInputException ex)
@@ -62,7 +34,6 @@ namespace PersonalFinanceTracker.Controller
             catch (Exception ex)
             {
                 Console.WriteLine($"Unexpected Error: {ex.Message}");
-                System.Diagnostics.Debug.WriteLine($"Exception Details: {ex}");
             }
         }
 
@@ -91,7 +62,6 @@ namespace PersonalFinanceTracker.Controller
             catch (Exception ex)
             {
                 Console.WriteLine($"Error retrieving transactions: {ex.Message}");
-                System.Diagnostics.Debug.WriteLine($"Exception Details: {ex}");
             }
         }
 
@@ -108,7 +78,7 @@ namespace PersonalFinanceTracker.Controller
                 }
 
                 _service.DeleteTransaction(id);
-                Console.WriteLine("✓ Transaction deleted successfully.");
+                Console.WriteLine("Transaction deleted successfully.");
             }
             catch (InvalidInputException ex)
             {

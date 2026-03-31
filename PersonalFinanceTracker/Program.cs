@@ -5,7 +5,6 @@ using PersonalFinanceTracker.Repositories;
 using PersonalFinanceTracker.Repositories.Interfaces;
 using PersonalFinanceTracker.Services;
 using PersonalFinanceTracker.Services.Interfaces;
-
 class Program
 {
     static void Main()
@@ -19,12 +18,10 @@ class Program
         IBudgetService budgetService = new BudgetService(budgetRepo);
         IReportService reportService = new ReportService(transactionRepo);
 
-        // Controllers
         var transactionController = new TransactionController(transactionService);
         var budgetController = new BudgetController(budgetService);
         var reportController = new ReportController(reportService);
 
-        // Menus
         var transactionMenu = new TransactionMenu(transactionController);
         var budgetMenu = new BudgetMenu(budgetController);
         var reportMenu = new ReportMenu(reportController);

@@ -1,5 +1,4 @@
 ﻿using PersonalFinanceTracker.Enum;
-
 namespace PersonalFinanceTracker.Models
 { 
     public class Transaction

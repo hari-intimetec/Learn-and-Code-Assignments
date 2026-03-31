@@ -4,7 +4,7 @@ namespace PersonalFinanceTracker.Repositories
 {
     public class BudgetRepository : IBudgetRepository
     {
-        private readonly List<Budget> _budgets = new();
+        private readonly List<Budget> _budgets = new List<Budget>();
 
         public void Add(Budget budget)
         {

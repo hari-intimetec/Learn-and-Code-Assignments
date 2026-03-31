@@ -10,7 +10,7 @@ namespace PersonalFinanceTracker.Services
 
         public BudgetService(IBudgetRepository budgetRepo)
         {
-            _budgetRepo = budgetRepo ?? throw new ArgumentNullException(nameof(budgetRepo), "Budget repository cannot be null.");
+            _budgetRepo = budgetRepo;
         }
 
         public void SetBudget(string category, decimal limit)
@@ -28,14 +28,7 @@ namespace PersonalFinanceTracker.Services
                     Year = DateTime.Now.Year
                 };
 
-                try
-                {
-                    _budgetRepo.Add(budget);
-                }
-                catch (Exception ex)
-                {
-                    throw new RepositoryException($"Failed to add budget to repository: {ex.Message}", ex);
-                }
+                _budgetRepo.Add(budget);
             }
             catch (InvalidBudgetException)
             {
@@ -74,7 +67,7 @@ namespace PersonalFinanceTracker.Services
             try
             {
                 var budgets = _budgetRepo.GetAll();
-                return budgets ?? new List<Budget>();
+                return budgets;
             }
             catch (Exception ex)
             {

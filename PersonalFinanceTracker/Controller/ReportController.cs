@@ -9,7 +9,7 @@ namespace PersonalFinanceTracker.Controller
 
         public ReportController(IReportService service)
         {
-            _service = service ?? throw new ArgumentNullException(nameof(service), "Report service cannot be null.");
+            _service = service;
         }
 
         public void ShowSummary()

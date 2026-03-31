@@ -2,7 +2,6 @@
 using PersonalFinanceTracker.Enum;
 using PersonalFinanceTracker.Exceptions;
 using PersonalFinanceTracker.Models;
-using PersonalFinanceTracker.Repositories;
 using PersonalFinanceTracker.Repositories.Interfaces;
 using PersonalFinanceTracker.Services.Interfaces;
 namespace PersonalFinanceTracker.Services
@@ -18,15 +17,29 @@ namespace PersonalFinanceTracker.Services
             IBudgetRepository budgetRepo,
             INotificationService notification)
         {
-            _transactionRepo = transactionRepo ?? throw new ArgumentNullException(nameof(transactionRepo), "Transaction repository cannot be null.");
-            _budgetRepo = budgetRepo ?? throw new ArgumentNullException(nameof(budgetRepo), "Budget repository cannot be null.");
-            _notification = notification ?? throw new ArgumentNullException(nameof(notification), "Notification service cannot be null.");
+            _transactionRepo = transactionRepo;
+            _budgetRepo = budgetRepo;
+            _notification = notification;
         }
 
-        public void AddTransaction(TransactionType type, decimal amount, string category)
+        public void AddTransaction()
         {
             try
             {
+                Console.Write("Type (1=Income, 2=Expense): ");
+                var typeInput = Console.ReadLine();
+
+                Console.Write("Amount: ");
+                var amountInput = Console.ReadLine();
+
+                if (!decimal.TryParse(amountInput, out var amount))
+                {
+                    throw new InvalidInputException("Invalid amount format. Please enter a valid decimal number.");
+                }
+                var category = Console.ReadLine();
+
+                var type = typeInput == "1" ? TransactionType.Income : TransactionType.Expense;
+
                 ValidateTransactionInput(amount, category);
 
                 var transaction = new Transaction
@@ -119,14 +132,8 @@ namespace PersonalFinanceTracker.Services
                 if (totalExpense > budget.Limit)
                 {
                     var message = $"Budget exceeded for {transaction.Category}. Total: {totalExpense:C}, Limit: {budget.Limit:C}";
-                    try
-                    {
-                        _notification.Send(message);
-                    }
-                    catch (Exception notificationEx)
-                    {
-                        System.Diagnostics.Debug.WriteLine($"Notification failed: {notificationEx.Message}");
-                    }
+                    _notification.Send(message);
+
                 }
             }
             catch (BudgetException)

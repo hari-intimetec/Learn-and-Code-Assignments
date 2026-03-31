@@ -9,7 +9,7 @@ namespace PersonalFinanceTracker.Controller
 
         public BudgetController(IBudgetService service)
         {
-            _service = service ?? throw new ArgumentNullException(nameof(service), "Budget service cannot be null.");
+            _service = service;
         }
 
         public void Set()
@@ -18,11 +18,6 @@ namespace PersonalFinanceTracker.Controller
             {
                 Console.Write("Category: ");
                 var category = Console.ReadLine();
-
-                if (string.IsNullOrWhiteSpace(category))
-                {
-                    throw new InvalidInputException("Category cannot be empty.");
-                }
 
                 Console.Write("Limit: ");
                 var limitInput = Console.ReadLine();
@@ -33,7 +28,7 @@ namespace PersonalFinanceTracker.Controller
                 }
 
                 _service.SetBudget(category, limit);
-                Console.WriteLine("✓ Budget set successfully.");
+                Console.WriteLine("Budget set successfully.");
             }
             catch (InvalidInputException ex)
             {
@@ -50,7 +45,6 @@ namespace PersonalFinanceTracker.Controller
             catch (Exception ex)
             {
                 Console.WriteLine($" Unexpected Error: {ex.Message}");
-                System.Diagnostics.Debug.WriteLine($"Exception Details: {ex}");
             }
         }
 
